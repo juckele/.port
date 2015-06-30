@@ -1,0 +1,13 @@
+#!/bin/bash
+
+alias add='git add'
+alias branch='git branch'
+alias checkout='git checkout'
+alias clone='git clone'
+alias commit='git commit'
+alias diff='git diff'
+alias pull='git pull'
+alias push='git push'
+alias rebase='git rebase'
+alias reset='git reset'
+

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+alias ls='ls --color -Fa'
+
+alias c='clear'
+alias e='emacs -nw'
+alias g='grep'
+alias p='perl'
+
+alias cde='cd $E'
+
+alias rebash='source ~/.bashrc'
+
