@@ -71,7 +71,15 @@ function proml {
     # Git Branch
     local git_branch=$(git branch 2>/dev/null | grep \* | sed 's/* //')
     local git_branch=$(echo $git_branch | sed 's/juckele\///')
-    
+    local git_email=$(git config user.email 2>/dev/null)
+    if [[ $git_email == "juckele@nuodb.com" ]]; then
+	local git_color="$BLUE"
+    elif [[ $git_email == "john.h.uckele@gmail.com" ]]; then
+	local git_color="$CYAN"
+    else
+	local git_color="$DARK_GRAY"
+    fi
+
     # Host color, darker on unusual hosts
     local host=$(echo -e "$HOSTNAME" | sed 's/\..*//');
 
@@ -82,8 +90,11 @@ function proml {
     fi
 
     if [[ $host == "juckele-mbp" ]]; then
-        local host_color="$DARK_GRAY"
-	local host_name="mbp"
+        local host_color="$LIGHT_RED"
+	local host_name="办公室"
+    elif [[ $host == "juckele-LPC" ]]; then
+	local host_color="$LIGHT_GREEN"
+	local host_name="马"
     else
         local host_color="$RED"
 	local host_name="$host"
@@ -91,7 +102,6 @@ function proml {
 
     local time_color="$GREEN"
     local user_color="$ORANGE"
-    local git_color="$BLUE"
     local path_color="$PURPLE"
     local input_color="$LIGHT_PURPLE"
     local operator_color="$YELLOW"
