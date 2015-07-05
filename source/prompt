@@ -11,11 +11,14 @@ function record_command_stop_time() {
 }
 function execute_trap(){
     record_command_start_time;
+    # Echo 'normal' text before program output so that
+    # it is not colorized by the prompt input color
     echo -ne '\033[0m'
 }
 
 # Colored prompt
 function proml {
+    # Actions to take on the first prompt of a session
     if [[ $FIRST_PROM == "" ]]; then
         echo "Hello!"
 	export PROMPT_LOCAL_READY="TRUE";
@@ -23,9 +26,11 @@ function proml {
         export FIRST_PROM="nope";
     fi
 
+    # Record command execution time stop and ready the traps
     record_command_stop_time;
     export PROMPT_LOCAL_READY="TRUE"
 
+    # Preemptive color setup
     local          RED="\[\033[0;31m\]"
     local    LIGHT_RED="\[\033[1;31m\]"
     local       YELLOW="\[\033[0;33m\]"
@@ -44,10 +49,11 @@ function proml {
     local        PLAIN="\[\033[0m\]"
     local         BOLD="\[\033[1;30m\]"
 
-    #colors of form where last number is the color # from ~juckele/bin/colors
+    # colors of form where last number is the color # from ~juckele/bin/colors
     local       ORANGE="\[\033[38;5;214m\]"
     local         PINK="\[\033[38;5;217m\]"
 
+    # What does this do? I honestly have no idea
     case $TERM in
         xterm*)
             TITLEBAR='[0;32m\t\033]0;\u \h:\W\007\]'
@@ -63,10 +69,6 @@ function proml {
     local delta_centiseconds="$((delta_ms % 1000 / 100))"
     local delta_centiseconds=$(printf "%0*d" 2 $delta_centiseconds)
     local pretty_delta="$(date -d @$((18000 + $delta_seconds)) +%T)"
-    #echo $delta_ms
-    #echo $delta_seconds
-    #echo $delta_centiseconds
-    #echo $pretty_delta
     
     # Git Branch
     local git_branch=$(git branch 2>/dev/null | grep \* | sed 's/* //')
@@ -80,29 +82,30 @@ function proml {
 	local git_color="$DARK_GRAY"
     fi
 
-    # Host color, darker on unusual hosts
-    local host=$(echo -e "$HOSTNAME" | sed 's/\..*//');
-
+    # User shorthand
     if [[ $USER == "juckele" ]]; then
         local user_name="我"
     else
         local user_name="$USER"
     fi
 
+    # Host color and shorthand name, darker on unusual hosts
+    local host=$(echo -e "$HOSTNAME" | sed 's/\..*//');
     if [[ $host == "juckele-mbp" ]]; then
         local host_color="$LIGHT_RED"
-	local host_name="办公室"
+	local host_name="苹果"
     elif [[ $host == "juckele-LPC" ]]; then
 	local host_color="$LIGHT_GREEN"
-	local host_name="马"
+	local host_name="小马旅"
     elif [[ $host == "ip-172-31-47-4" ]]; then
-	local host_name="云彩"
+	local host_name="云彩一"
 	local host_color="$RED"
     else
         local host_color="$DARK_GRAY"
 	local host_name="$host"
     fi
 
+    # Map colors to fields
     local time_color="$GREEN"
     local user_color="$ORANGE"
     local path_color="$PURPLE"
@@ -111,16 +114,15 @@ function proml {
     local operator_color2="$LIGHT_YELLOW"
     local operator_color3="$LIGHT_RED"
 
-# $user_color\u
+    # Build the actual prompt
     PS1="$PINK$pretty_delta$time_color\t $user_color$user_name$host_color$host_name $git_color$git_branch$path_color\w $operator_color输入 $input_color"
     PS2='$operator_color2什么$PLAIN '
     PS4='$operator_color3输入$PLAIN '
 }
 
-## Color revert
-# Experiment with color trapping...
+# Traps for color revert for program output and command time computation
 trap "execute_trap" DEBUG
 
-# actually set the prompt_command
+# And last but not least, set the prompt function
 export PROMPT_COMMAND=proml
 
