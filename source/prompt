@@ -95,8 +95,11 @@ function proml {
     elif [[ $host == "juckele-LPC" ]]; then
 	local host_color="$LIGHT_GREEN"
 	local host_name="马"
+    elif [[ $host == "ip-172-31-47-4" ]]; then
+	local host_name="云彩"
+	local host_color="$RED"
     else
-        local host_color="$RED"
+        local host_color="$DARK_GRAY"
 	local host_name="$host"
     fi
 
