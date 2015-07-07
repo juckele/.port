@@ -1,4 +1,24 @@
 #!/bin/bash
 
+# Lazy ~/git
+export G=~/git
+
 # Lazy gitk
 alias k='gitk'
+
+# Allow wildcard to match hidden files so that the following commands work on this project
+shopt -s dotglob
+
+# pull all git projects
+pullall () {
+    local pwd=$(pwd);
+    for f in $G/*; do cd $f; echo -e "\033[1;32mPulling $f\033[0m"; git pull; done
+    cd $pwd
+}
+
+# status for all git projects
+statusall () {
+    local pwd=$(pwd);
+    for f in $G/*; do cd $f; echo -e "\033[1;32mStatus of $f\033[0m"; git status; done
+    cd $pwd
+}
