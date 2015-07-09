@@ -3,8 +3,12 @@
 # Lazy ~/git
 export G=~/git
 
+# Preceed my own git install over my workplaces 3rd party tool repo
+alias git='/usr/bin/git'
 # Lazy gitk
 alias k='gitk'
+# Lazy git gui
+alias gg='git gui'
 
 # Allow wildcard to match hidden files so that the following commands work on this project
 shopt -s dotglob
