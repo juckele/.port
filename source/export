@@ -7,7 +7,7 @@ export HISTSIZE=1000000
 export _JAVA_OPTIONS='-Xmx8192m -Xms3m'
 export E=/e
 
-export PATH=$PATH:~/bin/
+export PATH=$PATH:~/bin/:~/git/.port/bin/
 
 export GREP_OPTIONS=--color=auto
 export LESS=-R

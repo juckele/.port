@@ -49,9 +49,12 @@ function proml {
     local        PLAIN="\[\033[0m\]"
     local         BOLD="\[\033[1;30m\]"
 
-    # colors of form where last number is the color # from ~juckele/bin/colors
+    # colors of form where last number is the color # from ~/git/.port/bin/colors
+    # Requires 256 color terminal
     local       ORANGE="\[\033[38;5;214m\]"
-    local         PINK="\[\033[38;5;217m\]"
+    local         PINK="\[\033[38;5;203m\]"
+    local   LIGHT_PINK="\[\033[38;5;217m\]"
+
 
     # What does this do? I honestly have no idea
     case $TERM in
@@ -94,6 +97,9 @@ function proml {
     if [[ $host == "juckele-mbp" ]]; then
         local host_color="$LIGHT_RED"
 	local host_name="苹果"
+    elif [[ $host == "juckele-gp" ]]; then
+        local host_color="$PINK"
+	local host_name="小羚羊"
     elif [[ $host == "juckele-LPC" ]]; then
 	local host_color="$LIGHT_GREEN"
 	local host_name="小马旅"
@@ -115,7 +121,7 @@ function proml {
     local operator_color3="$LIGHT_RED"
 
     # Build the actual prompt
-    PS1="$PINK$pretty_delta$time_color\t $user_color$user_name$host_color$host_name $git_color$git_branch$path_color\w $operator_color输入 $input_color"
+    PS1="$LIGHT_PINK$pretty_delta$time_color\t $user_color$user_name$host_color$host_name $git_color$git_branch$path_color\w $operator_color输入 $input_color"
     PS2='$operator_color2什么$PLAIN '
     PS4='$operator_color3输入$PLAIN '
 }
