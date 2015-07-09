@@ -112,8 +112,8 @@ function proml {
     fi
 
     # Map colors to fields
-    local time_color="$GREEN"
-    local user_color="$ORANGE"
+    local delta_color="$LIGHT_PINK"
+    local user_color="$GREEN"
     local path_color="$PURPLE"
     local input_color="$LIGHT_PURPLE"
     local operator_color="$YELLOW"
@@ -121,7 +121,7 @@ function proml {
     local operator_color3="$LIGHT_RED"
 
     # Build the actual prompt
-    PS1="$LIGHT_PINK$pretty_delta$time_color\t $user_color$user_name$host_color$host_name $git_color$git_branch$path_color\w $operator_color输入 $input_color"
+    PS1="$delta_color$pretty_delta $user_color$user_name$host_color$host_name $git_color$git_branch$path_color\w $operator_color输入 $input_color"
     PS2='$operator_color2什么$PLAIN '
     PS4='$operator_color3输入$PLAIN '
 }
