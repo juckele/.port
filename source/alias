@@ -11,3 +11,4 @@ alias cde='cd $E'
 
 alias rebash='source ~/.bashrc'
 
+alias java='/usr/bin/java "$@" 2> >(grep -v "^Picked up.*OPTION" >&2)'
