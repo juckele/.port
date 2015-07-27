@@ -8,7 +8,7 @@ export _JAVA_OPTIONS='-Xmx8192m -Xms3m'
 export E=/e
 
 # Add all the funny places bin files could be...
-export PATH=$PATH:~/bin/:~/git/.port/bin/:~/.local/bin
+export PATH=$PATH:~/bin/:~/git.port/bin/:~/.local/bin/:/etc/alternatives/
 
 export GREP_OPTIONS=--color=auto
 export LESS=-R

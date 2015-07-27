@@ -3,6 +3,10 @@
 # Lazy ~/git
 export G=~/git
 
+# Lazy git repos
+export V=$G/vivarium
+export P=$G/.port
+
 # Preceed my own git install over my workplaces 3rd party tool repo
 alias git='/usr/bin/git'
 # Lazy gitk
