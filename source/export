@@ -4,7 +4,6 @@ export USERGIVENNAME="John"
 export HISTFILESIZE=1000000
 export HISTSIZE=1000000
 
-export _JAVA_OPTIONS='-Xmx8192m -Xms3m'
 export E=/e
 
 # Add all the funny places bin files could be...
