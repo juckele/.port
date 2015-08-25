@@ -53,11 +53,6 @@ crl () {
      echo '';
 }
 
-# Personal AWS
-awssh () {
-    ssh -i ~/awskeypair.pem ubuntu@$1;
-}
-
 fig() {
       find ./ | grep $1
 }

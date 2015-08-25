@@ -13,8 +13,3 @@ export GREP_OPTIONS=--color=auto
 export LESS=-R
 
 export LS_COLORS="no=00:fi=00:di=01;34:ln=00;36:pi=40;32:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31:ex=00;32:"
-
-declare -A servers
-servers=( ["0"]="52.6.187.84"
-	  ["1"]="54.152.38.184"
-)
