@@ -7,7 +7,7 @@ export HISTSIZE=1000000
 export E=/e
 
 # Add all the funny places bin files could be...
-export PATH=$PATH:~/bin/:~/git.port/bin/:~/.local/bin/:/etc/alternatives/
+export PATH=$PATH:~/bin/:~/git/.port/bin/:~/.local/bin/:/etc/alternatives/
 
 export GREP_OPTIONS=--color=auto
 export LESS=-R
