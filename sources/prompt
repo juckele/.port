@@ -53,7 +53,7 @@ function proml {
     # Requires 256 color terminal
     local       ORANGE="\[\033[38;5;214m\]"
     local         PINK="\[\033[38;5;203m\]"
-    local   LIGHT_PINK="\[\033[38;5;217m\]"
+    local   LIGHT_PINK="\033[38;5;217m"
 
 
     # What does this do? I honestly have no idea
@@ -92,24 +92,9 @@ function proml {
         local user_name="$USER"
     fi
 
-    # Host color and shorthand name, darker on unusual hosts
-    local host=$(echo -e "$HOSTNAME" | sed 's/\..*//');
-    if [[ $host == "juckele-mbp" ]]; then
-        local host_color="$LIGHT_RED"
-	local host_name="苹果"
-    elif [[ $host == "juckele-gp" ]]; then
-        local host_color="$PINK"
-	local host_name="小羚羊"
-    elif [[ $host == "juckele-LPC" ]]; then
-	local host_color="$LIGHT_GREEN"
-	local host_name="小马旅"
-    elif [[ $host == "ip-172-31-47-4" ]]; then
-	local host_name="云彩一"
-	local host_color="$RED"
-    else
-        local host_color="$DARK_GRAY"
-	local host_name="$host"
-    fi
+    # Host color and shorthand name
+    local host_name=${PROMPTNAME:-$HOSTNAME}
+    local host_color=${HOSTCOLOR:-$"$DARK_GRAY"}
 
     # Map colors to fields
     local delta_color="$LIGHT_PINK"
