@@ -1,0 +1,3 @@
+#!/bin/bash
+
+for f in ~/git/.port/sources/*; do source $f; done
