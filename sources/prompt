@@ -92,11 +92,11 @@ function proml {
     fi
 
     # Host color and shorthand name
-    local host_name=${HOSTPROMPTNAME:-$HOSTNAME}
-    if [[ $HOSTPROMPTCOLOR == "" ]]; then
+    local host_name=${PROMPTNAME:-$HOSTNAME}
+    if [[ $HOSTCOLOR == "" ]]; then
 	local host_color="$DARK_GRAY"
     else
-	local host_color=$HOSTPROMPTCOLOR
+	local host_color=$HOSTCOLOR
     fi
     
 
