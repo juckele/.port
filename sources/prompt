@@ -53,8 +53,7 @@ function proml {
     # Requires 256 color terminal
     local       ORANGE="\[\033[38;5;214m\]"
     local         PINK="\[\033[38;5;203m\]"
-    local   LIGHT_PINK="\033[38;5;217m"
-
+    local   LIGHT_PINK="\[\033[38;5;217m\]"
 
     # What does this do? I honestly have no idea
     case $TERM in
@@ -94,7 +93,12 @@ function proml {
 
     # Host color and shorthand name
     local host_name=${PROMPTNAME:-$HOSTNAME}
-    local host_color=${HOSTCOLOR:-$"$DARK_GRAY"}
+    if [[ $HOSTCOLOR == "" ]]; then
+	local host_color="$DARK_GRAY"
+    else
+	local host_color=$HOSTCOLOR
+    fi
+    
 
     # Map colors to fields
     local delta_color="$LIGHT_PINK"
