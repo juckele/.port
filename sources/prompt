@@ -87,10 +87,13 @@ function proml {
     # User shorthand
     if [[ $USER == "juckele" ]]; then
         local user_name="我"
+	local user_color="$GREEN"
     elif [[ $USER == "vivarium" ]]; then
 	local user_name="生"
+        local user_color="$WHITE"
     else
         local user_name="$USER"
+        local user_color="$ORANGE"
     fi
 
     # Host color and shorthand name
@@ -104,7 +107,6 @@ function proml {
 
     # Map colors to fields
     local delta_color="$LIGHT_PINK"
-    local user_color="$GREEN"
     local path_color="$PURPLE"
     local input_color="$LIGHT_PURPLE"
     local operator_color="$YELLOW"
