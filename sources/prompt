@@ -87,6 +87,8 @@ function proml {
     # User shorthand
     if [[ $USER == "juckele" ]]; then
         local user_name="我"
+    elif [[ $USER == "vivarium" ]]; then
+	local user_name="生"
     else
         local user_name="$USER"
     fi
