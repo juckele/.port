@@ -103,7 +103,8 @@ function proml {
     else
 	local host_color=$HOSTPROMPTCOLOR
     fi
-    
+    #echo -ne "\033]0;${user_name}@${$host_name}\007"
+    echo -ne "\033]0;$user_name@$host_name\007"
 
     # Map colors to fields
     local delta_color="$LIGHT_PINK"
