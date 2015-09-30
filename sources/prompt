@@ -80,6 +80,8 @@ function proml {
 	local git_color="$BLUE"
     elif [[ $git_email == "john.h.uckele@gmail.com" ]]; then
 	local git_color="$CYAN"
+    elif [[ $git_email == "j@vivarium.io" ]]; then
+	local git_color="$LIGHT_CYAN"
     else
 	local git_color="$DARK_GRAY"
     fi
