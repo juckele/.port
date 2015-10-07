@@ -6,6 +6,8 @@ export HISTSIZE=1000000
 
 export E=/e
 
+export S=~/scratchpads
+
 # Add all the funny places bin files could be...
 export PATH=$PATH:~/bin/:~/git/.port/bin/:~/.local/bin/:/etc/alternatives/
 
