@@ -8,8 +8,13 @@ export E=/e
 
 export S=~/scratchpads
 
+# Gradle home
+export GRADLE_HOME="/opt/gradle"
+export PATH="$PATH:$GRADLE_HOME/bin"
+
 # Add all the funny places bin files could be...
 export PATH=$PATH:~/bin/:~/git/.port/bin/:~/.local/bin/:/etc/alternatives/
+
 
 export GRADLE_OPTS="-Dorg.gradle.daemon=true"
 export GREP_OPTIONS=--color=auto
