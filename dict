@@ -1,5 +1,6 @@
 accessor
 authenticatable
+cryptographically
 decommissioned
 deserialization
 deserialize
@@ -18,9 +19,9 @@ parsable
 preprocess
 preprocessed
 preprocessing
+pseudorandomly
 reentrancy
 transactional
 Uckele
 unstarted
 vivarium
-cryptographically
