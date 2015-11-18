@@ -76,7 +76,8 @@ function proml {
     local git_branch=$(git branch 2>/dev/null | grep \* | sed 's/* //')
     local git_branch=$(echo $git_branch | sed 's/juckele\///')
     local git_email=$(git config user.email 2>/dev/null)
-    local git_status=$(git status --porcelain 2>/dev/null)
+    local git_dirty=$(git status --porcelain 2>/dev/null)
+    local git_ahead=$(git log origin/master..master | wc -l)
     if [[ $git_email == "juckele@nuodb.com" ]]; then
 	local git_color="$BLUE"
     elif [[ $git_email == "john.h.uckele@gmail.com" ]]; then
@@ -87,11 +88,15 @@ function proml {
 	local git_color="$DARK_GRAY"
     fi
 
-    if [[ $git_status ]]; then
+    if [[ $git_dirty ]]; then
+	local git_status_color="$RED"
+	local git_status="Δ"
+    elif [[ $git_ahead > 0 ]]; then
+	local git_status_color="$YELLOW"
 	local git_status="Δ"
     else
-
-	local git_stauts=""
+	local git_status_color="$GREEN"
+	local git_status="="
     fi
 
     # User shorthand
@@ -123,7 +128,6 @@ function proml {
     local operator_color="$YELLOW"
     local operator_color2="$LIGHT_YELLOW"
     local operator_color3="$LIGHT_RED"
-    local git_status_color="$RED"
 
     # Build the actual prompt
     PS1="$delta_color$pretty_delta$user_color$user_name$host_color$host_name$git_color$git_branch$git_status_color$git_status$path_color\w${operator_color}输入 $input_color"
