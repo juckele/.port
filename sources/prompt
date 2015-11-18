@@ -77,7 +77,7 @@ function proml {
     local git_branch=$(echo $git_branch | sed 's/juckele\///')
     local git_email=$(git config user.email 2>/dev/null)
     local git_dirty=$(git status --porcelain 2>/dev/null)
-    local git_ahead=$(git log origin/master..master | wc -l)
+    local git_ahead=$(git log origin/master..master 2>/dev/null | wc -l)
     if [[ $git_email == "juckele@nuodb.com" ]]; then
 	local git_color="$BLUE"
     elif [[ $git_email == "john.h.uckele@gmail.com" ]]; then
@@ -94,7 +94,7 @@ function proml {
     elif [[ $git_ahead > 0 ]]; then
 	local git_status_color="$YELLOW"
 	local git_status="Δ"
-    else
+    elif [[ $git_branch ]]; then
 	local git_status_color="$GREEN"
 	local git_status="="
     fi
