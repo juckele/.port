@@ -20,7 +20,7 @@ function execute_trap(){
 function proml {
     # Actions to take on the first prompt of a session
     if [[ $FIRST_PROM == "" ]]; then
-#        echo "Hello!"
+        echo "Hello!"
 	export PROMPT_LOCAL_READY="TRUE";
 	record_command_start_time;
         export FIRST_PROM="nope";
