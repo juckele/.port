@@ -10,10 +10,19 @@ function record_command_stop_time() {
     export PROMPT_LOCAL_STOP_TIME=$(date +%s%N | cut -b1-13)
 }
 function execute_trap(){
-    record_command_start_time;
-    # Echo 'normal' text before program output so that
-    # it is not colorized by the prompt input color
-    echo -ne '\033[0m'
+    if [[ $TRAP_READY == "TRUE" ]]; then
+        export TRAP_READY="FALSE"
+
+        # Time new command was executed
+        local        LEMON="\033[38;5;227m"
+        local pretty_time="$(date +%T)"
+        echo -e "$LEMON$pretty_time"
+    
+        record_command_start_time;
+        # Echo 'normal' text before program output so that
+        # it is not colorized by the prompt input color
+        echo -ne '\033[0m'
+    fi
 }
 
 # Colored prompt
@@ -29,6 +38,7 @@ function proml {
     # Record command execution time stop and ready the traps
     record_command_stop_time;
     export PROMPT_LOCAL_READY="TRUE"
+    export TRAP_READY="TRUE"
 
     # Preemptive color setup
     local          RED="\[\033[0;31m\]"
@@ -54,6 +64,7 @@ function proml {
     local       ORANGE="\[\033[38;5;214m\]"
     local         PINK="\[\033[38;5;203m\]"
     local   LIGHT_PINK="\[\033[38;5;217m\]"
+    local        OLIVE="\[\033[38;5;107m\]"
 
     # What does this do? I honestly have no idea
     case $TERM in
@@ -72,6 +83,9 @@ function proml {
     local delta_centiseconds=$(printf "%0*d" 2 $delta_centiseconds)
     local pretty_delta="$(date -d @$((18000 + $delta_seconds)) +%T)"
     
+    # Now
+    local pretty_time="$(date +%T)"
+
     # Git Branch
     local git_branch=$(git branch 2>/dev/null | grep \* | sed 's/* //')
     local git_branch=$(echo $git_branch | sed 's/juckele\///')
@@ -123,6 +137,7 @@ function proml {
 
     # Map colors to fields
     local delta_color="$LIGHT_PINK"
+    local time_color="$OLIVE"
     local path_color="$PURPLE"
     local input_color="$LIGHT_PURPLE"
     local operator_color="$YELLOW"
@@ -130,7 +145,7 @@ function proml {
     local operator_color3="$LIGHT_RED"
 
     # Build the actual prompt
-    PS1="$delta_color$pretty_delta$user_color$user_name$host_color$host_name$git_color$git_branch$git_status_color$git_status$path_color\w${operator_color}输入 $input_color"
+    PS1="$time_color$pretty_time\n$delta_color$pretty_delta$user_color$user_name$host_color$host_name$git_color$git_branch$git_status_color$git_status$path_color\w${operator_color}输入 $input_color"
     PS2='$operator_color2什么$PLAIN '
     PS4='$operator_color3输入$PLAIN '
 }
