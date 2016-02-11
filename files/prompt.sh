@@ -87,30 +87,34 @@ function proml {
     local pretty_time="$(date +%T)"
 
     # Git Branch
-    local git_branch=$(git branch 2>/dev/null | grep \* | sed 's/* //')
-    local git_branch=$(echo $git_branch | sed 's/juckele\///')
-    local git_email=$(git config user.email 2>/dev/null)
-    local git_dirty=$(git status --porcelain 2>/dev/null)
-    local git_ahead=$(git log origin/master..master 2>/dev/null | wc -l)
-    if [[ $git_email == "juckele@nuodb.com" ]]; then
-	local git_color="$BLUE"
-    elif [[ $git_email == "john.h.uckele@gmail.com" ]]; then
-	local git_color="$CYAN"
-    elif [[ $git_email == "j@vivarium.io" ]]; then
-	local git_color="$LIGHT_CYAN"
-    else
-	local git_color="$DARK_GRAY"
-    fi
+    local in_git_repo=$(git rev-parse --is-inside-work-tree 2>/dev/null)
+    if [[ $in_get_repo ]]; then
+        local git_branch=$(git branch 2>/dev/null | grep \* | sed 's/* //')
+        local git_branch=$(echo $git_branch | sed 's/juckele\///')
+        local git_email=$(git config user.email 2>/dev/null)
+        local git_dirty=$(git status --porcelain 2>/dev/null)
+        local git_ahead=$(git log origin/master..master 2>/dev/null | wc -l)
+        if [[ $git_email == "juckele@nuodb.com" ]]; then
+            local git_color="$BLUE"
+        elif [[ $git_email == "john.h.uckele@gmail.com" ]]; then
+	    local git_color="$CYAN"
+        elif [[ $git_email == "j@vivarium.io" ]]; then
+	    local git_color="$LIGHT_CYAN"
+        else
+	    local git_color="$DARK_GRAY"
+        fi
 
-    if [[ $git_dirty ]]; then
-	local git_status_color="$RED"
-	local git_status="Δ"
-    elif [[ $git_ahead > 0 ]]; then
-	local git_status_color="$YELLOW"
-	local git_status="Δ"
-    elif [[ $git_branch ]]; then
-	local git_status_color="$GREEN"
-	local git_status="="
+        if [[ $git_dirty ]]; then
+            local git_status_color="$RED"
+	    local git_status="Δ"
+        elif [[ $git_ahead > 0 ]]; then
+            local git_status_color="$YELLOW"
+	    local git_status="Δ"
+        elif [[ $git_branch ]]; then
+	    local git_status_color="$GREEN"
+	    local git_status="="
+        fi
+
     fi
 
     # User shorthand
