@@ -88,7 +88,7 @@ function proml {
 
     # Git Branch
     local in_git_repo=$(git rev-parse --is-inside-work-tree 2>/dev/null)
-    if [[ $in_get_repo ]]; then
+    if [[ $in_git_repo == "true" ]]; then
         local git_branch=$(git branch 2>/dev/null | grep \* | sed 's/* //')
         local git_branch=$(echo $git_branch | sed 's/juckele\///')
         local git_email=$(git config user.email 2>/dev/null)
