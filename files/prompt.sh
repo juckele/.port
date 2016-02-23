@@ -65,6 +65,7 @@ function proml {
     local         PINK="\[\033[38;5;203m\]"
     local   LIGHT_PINK="\[\033[38;5;217m\]"
     local        OLIVE="\[\033[38;5;107m\]"
+    local        LILAC="\[\033[38;5;111m\]"
 
     # What does this do? I honestly have no idea
     case $TERM in
@@ -100,6 +101,8 @@ function proml {
 	    local git_color="$CYAN"
         elif [[ $git_email == "j@vivarium.io" ]]; then
 	    local git_color="$LIGHT_CYAN"
+        elif [[ $git_email == "juckele@google.com" ]]; then
+	    local git_color="$LILAC"
         else
 	    local git_color="$DARK_GRAY"
         fi
