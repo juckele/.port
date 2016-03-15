@@ -30,6 +30,7 @@ function proml {
     # Actions to take on the first prompt of a session
     if [[ $FIRST_PROM == "" ]]; then
         echo "Hello!"
+        bc -l <<< "1 - ($(date -d '01/04/2017' +%s) - $(date +%s))/86400/365"
 	export PROMPT_LOCAL_READY="TRUE";
 	record_command_start_time;
         export FIRST_PROM="nope";
