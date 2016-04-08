@@ -153,7 +153,7 @@ function proml {
     local operator_color3="$LIGHT_RED"
 
     # Build the actual prompt
-    PS1="$time_color$pretty_time\n$delta_color$pretty_delta$user_color$user_name$host_color$host_name$git_color$git_branch$git_status_color$git_status$path_color\w${operator_color}输入 $input_color"
+    PS1="$time_color$pretty_time\n$path_color\w\n$delta_color$pretty_delta$user_color$user_name$host_color$host_name$git_color$git_branch$git_status_color$git_status${operator_color}输入 $input_color"
     PS2='$operator_color2什么$PLAIN '
     PS4='$operator_color3输入$PLAIN '
 }
