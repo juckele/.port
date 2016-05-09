@@ -19,6 +19,10 @@ function execute_trap(){
         echo -e "$LEMON$pretty_time"
     
         record_command_start_time;
+
+        # Display user and host in tab, add ! to indicate running process.
+        echo -ne "\033]0;$user_name@$host_name!\007"
+
         # Echo 'normal' text before program output so that
         # it is not colorized by the prompt input color
         echo -ne '\033[0m'
@@ -68,16 +72,6 @@ function proml {
     local        OLIVE="\[\033[38;5;107m\]"
     local        LILAC="\[\033[38;5;111m\]"
 
-    # What does this do? I honestly have no idea
-    case $TERM in
-        xterm*)
-            TITLEBAR='[0;32m\t\033]0;\u \h:\W\007\]'
-            ;;
-        *)
-            TITLEBAR=""
-            ;;
-    esac
-
     # command time computation
     local delta_ms="$((PROMPT_LOCAL_STOP_TIME - $PROMPT_LOCAL_START_TIME))"
     local delta_seconds="$(($delta_ms / 1000))"
@@ -123,7 +117,7 @@ function proml {
 
     # User shorthand
     if [[ $USER == "juckele" ]]; then
-        local user_name="我"
+        export user_name="我"
 	local user_color="$GREEN"
     elif [[ $USER == "vivarium" ]]; then
 	local user_name="生"
@@ -134,13 +128,14 @@ function proml {
     fi
 
     # Host color and shorthand name
-    local host_name=${PROMPTNAME:-$HOSTNAME}
+    export host_name=${PROMPTNAME:-$HOSTNAME}
     if [[ $HOSTPROMPTCOLOR == "" ]]; then
 	local host_color="$DARK_GRAY"
     else
 	local host_color=$HOSTPROMPTCOLOR
     fi
-    #echo -ne "\033]0;${user_name}@${$host_name}\007"
+
+    # Display user and host in tab
     echo -ne "\033]0;$user_name@$host_name\007"
 
     # Map colors to fields
