@@ -62,6 +62,6 @@ fig() {
       find ./ | grep $1
 }
 
-jf() {
-     find ./ | grep $1.*java
+fx() {
+     find ./ | grep $1.*\.$2
 }
