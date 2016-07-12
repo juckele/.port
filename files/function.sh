@@ -30,6 +30,11 @@ empty () {
     rm ~/empty_temp;
 }
 
+# Surfaces all terminals to the top
+show() {
+    xdotool search --class "terminal" windowactivate %@ > /dev/null 2>&1
+}
+
 un () {
     killall -v -u juckele -9 $1;
 }
