@@ -7,11 +7,15 @@ export HISTSIZE=1000000
 export E=/e
 export P4EDITOR="emacs"
 
-export S=~/scratchpads
-
 # Gradle home
 export GRADLE_HOME="/opt/gradle"
 export PATH="$PATH:$GRADLE_HOME/bin"
+
+# Brew Paths
+if [[ $(uname) == "Darwin" ]]; then
+    export PATH=$HOME/homebrew/bin:$PATH
+    export LD_LIBRARY_PATH=$HOME/homebrew/lib:$LD_LIBRARY_PATH
+fi
 
 # Add all the funny places bin files could be...
 export PATH=$PATH:~/bin/:~/git/.port/bin/:~/.local/bin/:/etc/alternatives/
