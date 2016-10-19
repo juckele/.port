@@ -5,7 +5,8 @@ export HISTFILESIZE=1000000
 export HISTSIZE=1000000
 
 export E=/e
-export P4EDITOR="emacs"
+export EDITOR="emacs"
+export P4EDITOR=$EDITOR
 
 # Gradle home
 export GRADLE_HOME="/opt/gradle"
