@@ -10,14 +10,14 @@ export P=$G/.port
 # Preceed my own git install over my workplaces 3rd party tool repo
 
 if [[ $(uname) == "Darwin" ]]; then
-    alias git='/usr/bin/git'
+    alias git='/Users/juckele/homebrew/bin/git'
 
     # Lazy gitk
     alias k='gitx'
     # Lazy git gui
     alias gg='gitx'
 else
-    alias git='/Users/juckele/homebrew/bin/git'
+    alias git='/usr/bin/git'
 
     # Lazy gitk
     alias k='gitk'
