@@ -16,6 +16,10 @@ if [[ $(uname) == "Darwin" ]]; then
     alias k='gitx'
     # Lazy git gui
     alias gg='gitx'
+
+    if [ -f $(brew --prefix)/etc/bash_completion ]; then
+        . $(brew --prefix)/etc/bash_completion
+    fi
 else
     alias git='/usr/bin/git'
 
