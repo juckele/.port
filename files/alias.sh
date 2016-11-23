@@ -1,6 +1,13 @@
 #!/bin/bash
 
-alias ls='ls --color -FA'
+if [[ $(uname) == "Darwin" ]]; then
+    alias date="gdate"
+    alias ls="gls -FA"
+    alias uniq="guniq"
+    alias rm="grm"
+else
+    alias ls='ls --color -FA'
+fi
 
 alias c='clear'
 alias e='emacs -nw'
