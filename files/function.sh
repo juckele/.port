@@ -6,6 +6,10 @@ hist () {
     grep "$@" ~/.bash_history | uniq --count | tail -50;
 }
 
+uhist () {
+    grep "$@" ~/.bash_history | uniq --count;
+}
+
 rhist () {
      history | tail -150;
 }
