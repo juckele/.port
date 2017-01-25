@@ -7,14 +7,13 @@ if [[ $(uname) == "Darwin" ]]; then
     alias rm="grm"
 else
     alias ls='ls --color -FA'
+    alias say='espeak'
 fi
 
 alias c='clear'
 alias e='emacs -nw'
 alias g='grep --color=auto'
 alias grep='grep --color=auto'
-
-alias say='espeak'
 
 alias cde='cd $E'
 
