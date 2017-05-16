@@ -87,12 +87,11 @@ gr() {
 # use .gradlew if it exists
 gradle() {
   if [ -f ./gradlew ]; then
-    echo './gradlew exists, using that';
-    ./gradlew;
+    echo './gradlew exists, using ./gradlew file';
+    ./gradlew $*;
   else
-    echo './gradlew does not exist, which gradle?';
+    echo './gradlew does not exist, using default system gradle installation';
     local GRADLE_CMD=$(which gradle);
-    echo -ne $GRADLE_CMD;
-    $GRADLE_CMD;
+    $GRADLE_CMD $*;
   fi
 }
