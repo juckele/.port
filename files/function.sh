@@ -83,3 +83,16 @@ gr() {
 #     ROOT=${2:./}
      grep -r $1 ./
 }
+
+# use .gradlew if it exists
+gradle() {
+  if [ -f ./gradlew ]; then
+    echo './gradlew exists, using that';
+    ./gradlew;
+  else
+    echo './gradlew does not exist, which gradle?';
+    local GRADLE_CMD=$(which gradle);
+    echo -ne $GRADLE_CMD;
+    $GRADLE_CMD;
+  fi
+}
