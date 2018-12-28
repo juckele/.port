@@ -33,6 +33,7 @@ function execute_trap(){
 function proml {
     # Actions to take on the first prompt of a session
     if [[ $FIRST_PROM == "" ]]; then
+        echo -e $BANNERNAME | toilet --gay -f bigascii12
         echo "Hello!"
         bc -l <<< "- ($(date -d '01/04/2016' +%s) - $(date +%s))/86400/365"
         bc -l <<< "- ($(date -d '06/21/2013' +%s) - $(date +%s))/86400/365"
