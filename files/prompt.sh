@@ -84,17 +84,18 @@ function proml {
     # Now
     local pretty_time="$(date +%T)"
 
-    # Git Branch
+    # Git Branch Specific colors and substrings
     local in_git_repo=$(git rev-parse --is-inside-work-tree 2>/dev/null)
     if [[ $in_git_repo == "true" ]]; then
+        # Determine git branch / email / status
         local git_branch=$(git branch 2>/dev/null | grep \* | sed 's/* //')
         local git_branch=$(echo $git_branch | sed 's/juckele\///')
         local git_email=$(git config user.email 2>/dev/null)
         local git_dirty=$(git status --porcelain 2>/dev/null)
         local git_ahead=$(git log origin/master..master 2>/dev/null | wc -l)
-        if [[ $git_email == "juckele@nuodb.com" ]]; then
-            local git_color="$BLUE"
-        elif [[ $git_email == "john.h.uckele@gmail.com" ]]; then
+
+        # Colorize the branch name based on the current git email
+        if [[ $git_email == "john.h.uckele@gmail.com" ]]; then
 	    local git_color="$CYAN"
         elif [[ $git_email == "j@vivarium.io" ]]; then
 	    local git_color="$LIGHT_CYAN"
@@ -104,6 +105,7 @@ function proml {
 	    local git_color="$DARK_GRAY"
         fi
 
+        # Determine symbol+color to show the git status
         if [[ $git_dirty ]]; then
             local git_status_color="$RED"
 	    local git_status="Δ"
