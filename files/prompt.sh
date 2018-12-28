@@ -36,6 +36,7 @@ function proml {
         echo "Hello!"
         bc -l <<< "- ($(date -d '01/04/2016' +%s) - $(date +%s))/86400/365"
         bc -l <<< "- ($(date -d '06/21/2013' +%s) - $(date +%s))/86400/365"
+        bc -l <<< "- ($(date -d '02/06/2017' +%s) - $(date +%s))/86400/365"
 	export PROMPT_LOCAL_READY="TRUE";
 	record_command_start_time;
         export FIRST_PROM="nope";
