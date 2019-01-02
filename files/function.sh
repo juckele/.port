@@ -3,11 +3,11 @@
 ## HISTORY MANAGEMENT
 # history grepping command
 hist () {
-    grep "$@" ~/.bash_history | uniq --count | tail -50;
+    grep $@ ~/.bash_history | uniq --count | tail -50;
 }
 
 uhist () {
-    grep "$@" ~/.bash_history | uniq --count;
+    grep $@ ~/.bash_history | uniq --count;
 }
 
 rhist () {
