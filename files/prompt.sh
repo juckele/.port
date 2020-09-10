@@ -17,7 +17,7 @@ function execute_trap(){
         local        LEMON="\033[38;5;227m"
         local pretty_time="$(date +%T)"
         echo -e "$LEMON$pretty_time"
-    
+
         record_command_start_time;
 
         # Display user and host in tab, add ! to indicate running process.
@@ -29,8 +29,22 @@ function execute_trap(){
     fi
 }
 
+function show_bar(){
+
+    # Determine bar color
+    if [[ $pipe_status == "0" ]]; then
+      printf '\e[1;42m\e[1;30m%*s\n\e[m' "${COLUMNS:-$(tput cols)}" '' | tr ' ' \#
+    elif [[ $? != "" ]]; then
+      printf '\e[1;41m\e[1;30m%*s\n\e[m' "${COLUMNS:-$(tput cols)}" '' | tr ' ' \#
+    else
+      printf '\e[1;43m\e[1;30m%*s\n\e[m' "${COLUMNS:-$(tput cols)}" '' | tr ' ' \#
+    fi
+}
+
 # Colored prompt
 function proml {
+    local pipe_status=${PIPESTATUS[0]}
+
     # Actions to take on the first prompt of a session
     if [[ $FIRST_PROM == "" ]]; then
         echo -e $BANNERNAME | toilet --gay -f bigascii12
@@ -42,6 +56,9 @@ function proml {
 	record_command_start_time;
         export FIRST_PROM="nope";
     fi
+
+    # Show the bar
+    show_bar;
 
     # Record command execution time stop and ready the traps
     record_command_stop_time;
@@ -74,6 +91,12 @@ function proml {
     local   LIGHT_PINK="\[\033[38;5;217m\]"
     local        OLIVE="\[\033[38;5;107m\]"
     local        LILAC="\[\033[38;5;111m\]"
+    local        BLACK="\[\033[38;5;233m\]"
+
+    # For line breaks
+    local    WHITE_BAR="\[\033[1;47m\]"
+    local    GREEN_BAR="\[\033[1;42m\]"
+    local      RED_BAR="\[\033[1;41m\]"
 
     # command time computation
     local delta_ms="$((PROMPT_LOCAL_STOP_TIME - $PROMPT_LOCAL_START_TIME))"
@@ -81,7 +104,7 @@ function proml {
     local delta_centiseconds="$((delta_ms % 1000 / 100))"
     local delta_centiseconds=$(printf "%0*d" 2 $delta_centiseconds)
     local pretty_delta="$(date -d @$((18000 + $delta_seconds)) +%T)"
-    
+
     # Now
     local pretty_time="$(date +%T)"
 
@@ -163,4 +186,3 @@ trap "execute_trap" DEBUG
 
 # And last but not least, set the prompt function
 export PROMPT_COMMAND=proml
-
