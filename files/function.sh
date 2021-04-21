@@ -34,6 +34,25 @@ empty () {
     rm ~/empty_temp;
 }
 
+# Wrapper/shorthand for exit, with added handling for screen
+ex() {
+  # If we're in a screen session
+  # exit iff the user passes -f, otherwise detach
+  if [[ $STY ]]; then
+    if [[ $1 == "-f" ]]; then
+      echo "Forcing exit from screen bash. Goodbye!";
+      exit;
+    else
+      echo "You're in a screen session. Use -f if you actually want to exit!"
+      screen -d;
+    fi
+  # If we're not in a screen session, exit normally always.
+  else
+    echo "Goodbye!";
+    exit;
+  fi
+}
+
 # Surfaces all terminals to the top
 show() {
     xdotool search --class "terminal" windowactivate %@ > /dev/null 2>&1

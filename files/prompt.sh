@@ -163,6 +163,8 @@ function proml {
 	local host_color=$HOSTPROMPTCOLOR
     fi
 
+    # Screen session if present
+    local screen_session=$(echo $STY | sed 's/.*\.//')
     # Display user and host in tab
     echo -ne "\033]0;$user_name@$host_name\007"
 
@@ -171,12 +173,13 @@ function proml {
     local time_color="$OLIVE"
     local path_color="$PURPLE"
     local input_color="$LIGHT_PURPLE"
+    local screen_session_color="$WHITE"
     local operator_color="$YELLOW"
     local operator_color2="$LIGHT_YELLOW"
     local operator_color3="$LIGHT_RED"
 
     # Build the actual prompt
-    PS1="$time_color$pretty_time\n$path_color\w\n$delta_color$pretty_delta$user_color$user_name$host_color$host_name$git_color$git_branch$git_status_color$git_status${operator_color}输入 $input_color"
+    PS1="$time_color$pretty_time\n$path_color\w\n$delta_color$pretty_delta$user_color$user_name$host_color$host_name$git_color$git_branch$git_status_color$git_status$screen_session_color$screen_session${operator_color}输入 $input_color"
     PS2='$operator_color2什么$PLAIN '
     PS4='$operator_color3输入$PLAIN '
 }
