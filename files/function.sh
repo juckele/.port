@@ -42,9 +42,10 @@ ex() {
     if [[ $1 == "-f" ]]; then
       echo "Forcing exit from screen bash. Goodbye!";
       exit;
+    elif [[ $1 == "-d" ]]; then
+      screen -d $STY;
     else
-      echo "You're in a screen session. Use -f if you actually want to exit!"
-      screen -d;
+      echo "You're in a screen session. Use -f if you actually want to exit the shell or -d to detach!"
     fi
   # If we're not in a screen session, exit normally always.
   else
