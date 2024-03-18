@@ -32,7 +32,10 @@ function execute_trap(){
 function show_bar(){
 
     # Determine bar color
-    if [[ $pipe_status == "0" ]]; then
+    if [[ $FIRST_PROM == "yup" ]]; then
+      printf '\e[1;45m\e[1;30m%*s\n\e[m' "${COLUMNS:-$(tput cols)}" '' | tr ' ' \#
+      export FIRST_PROM="done";
+    elif [[ $pipe_status == "0" ]]; then
       printf '\e[1;42m\e[1;30m%*s\n\e[m' "${COLUMNS:-$(tput cols)}" '' | tr ' ' \#
     elif [[ $? != "" ]]; then
       printf '\e[1;41m\e[1;30m%*s\n\e[m' "${COLUMNS:-$(tput cols)}" '' | tr ' ' \#
@@ -54,7 +57,7 @@ function proml {
         bc -l <<< "- ($(date -d '02/06/2017' +%s) - $(date +%s))/86400/365"
 	export PROMPT_LOCAL_READY="TRUE";
 	record_command_start_time;
-        export FIRST_PROM="nope";
+        export FIRST_PROM="yup";
     fi
 
     # Show the bar
@@ -179,9 +182,9 @@ function proml {
     local operator_color3="$LIGHT_RED"
 
     # Build the actual prompt
-    PS1="$time_color$pretty_time\n$path_color\w\n$delta_color$pretty_delta$user_color$user_name$host_color$host_name$git_color$git_branch$git_status_color$git_status$screen_session_color$screen_session${operator_color}输入 $input_color"
-    PS2='$operator_color2什么$PLAIN '
-    PS4='$operator_color3输入$PLAIN '
+    PS1="$time_color$pretty_time\n$path_color\w\n$delta_color$pretty_delta$user_color$user_name$host_color$host_name$git_color$git_branch$git_status_color$git_status$screen_session_color$screen_session${operator_color}: $input_color"
+    PS2='$operator_color2?$PLAIN '
+    PS4='$operator_color3:$PLAIN '
 }
 
 # Traps for color revert for program output and command time computation
